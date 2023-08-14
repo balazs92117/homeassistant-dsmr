@@ -425,17 +425,8 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     DSMRSensorEntityDescription(
-        key="eon_hu_electricity_active_tariff",
-        translation_key="eon_hu_electricity_active_tariff",
-        obis_reference=obis_references.ELECTRICITY_ACTIVE_TARIFF,
-        dsmr_versions={"5EONHU"},
-        entity_registry_enabled_default=False,
-        state_class=SensorStateClass.MEASUREMENT,
-        entity_category=EntityCategory.DIAGNOSTIC,
-    ),
-    DSMRSensorEntityDescription(
         key="eon_hu_actual_switch_position",
-        translation_key="eon_hu_actual_switch_position",
+        translation_key="actual_switch_position",
         obis_reference=obis_references.ACTUAL_SWITCH_POSITION,
         dsmr_versions={"5EONHU"},
         entity_registry_enabled_default=False,
@@ -444,7 +435,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
     ),
     DSMRSensorEntityDescription(
         key="eon_hu_electricity_combined",
-        translation_key="eon_hu_electricity_combined",
+        translation_key="electricity_combined",
         obis_reference=obis_references.EON_HU_ELECTRICITY_COMBINED,
         dsmr_versions={"5EONHU"},
         device_class=SensorDeviceClass.ENERGY,
@@ -452,7 +443,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
     ),
     DSMRSensorEntityDescription(
         key="eon_hu_instantaneous_power_factor_total",
-        translation_key="eon_hu_instantaneous_power_factor_total",
+        translation_key="instantaneous_power_factor_total",
         obis_reference=obis_references.EON_HU_INSTANTANEOUS_POWER_FACTOR_TOTAL,
         dsmr_versions={"5EONHU"},
         entity_registry_enabled_default=False,
@@ -461,7 +452,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
     ),
     DSMRSensorEntityDescription(
         key="eon_hu_instantaneous_power_factor_l1",
-        translation_key="eon_hu_instantaneous_power_factor_l1",
+        translation_key="instantaneous_power_factor_l1",
         obis_reference=obis_references.EON_HU_INSTANTANEOUS_POWER_FACTOR_L1,
         dsmr_versions={"5EONHU"},
         entity_registry_enabled_default=False,
@@ -470,7 +461,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
     ),
     DSMRSensorEntityDescription(
         key="eon_hu_instantaneous_power_factor_l2",
-        translation_key="eon_hu_instantaneous_power_factor_l2",
+        translation_key="instantaneous_power_factor_l2",
         obis_reference=obis_references.EON_HU_INSTANTANEOUS_POWER_FACTOR_L2,
         dsmr_versions={"5EONHU"},
         entity_registry_enabled_default=False,
@@ -479,7 +470,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
     ),
     DSMRSensorEntityDescription(
         key="eon_hu_instantaneous_power_factor_l3",
-        translation_key="eon_hu_instantaneous_power_factor_l3",
+        translation_key="instantaneous_power_factor_l3",
         obis_reference=obis_references.EON_HU_INSTANTANEOUS_POWER_FACTOR_L3,
         dsmr_versions={"5EONHU"},
         entity_registry_enabled_default=False,
@@ -488,7 +479,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
     ),
     DSMRSensorEntityDescription(
         key="eon_hu_frequency",
-        translation_key="eon_hu_frequency",
+        translation_key="frequency",
         obis_reference=obis_references.EON_HU_FREQUENCY,
         dsmr_versions={"5EONHU"},
         entity_registry_enabled_default=False,
