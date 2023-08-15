@@ -102,7 +102,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         obis_reference=obis_references.ELECTRICITY_ACTIVE_TARIFF,
         dsmr_versions={"2.2", "4", "5", "5B", "5L", "5EONHU"},
         device_class=SensorDeviceClass.ENUM,
-        options=["low", "normal"],
+        options=["low", "normal", "tariff3", "tariff4"],
         icon="mdi:flash",
     ),
     DSMRSensorEntityDescription(
@@ -352,7 +352,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         key="belgium_max_power_per_phase",
         translation_key="max_power_per_phase",
         obis_reference=obis_references.BELGIUM_MAX_POWER_PER_PHASE,
-        dsmr_versions={"5B", "5EONHU"},
+        dsmr_versions={"5B"},
         device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
@@ -429,6 +429,16 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         translation_key="actual_switch_position",
         obis_reference=obis_references.ACTUAL_SWITCH_POSITION,
         dsmr_versions={"5EONHU"},
+        device_class=SensorDeviceClass.ENUM,
+        options=["1", "0"],
+        icon="mdi:electric-switch",
+    ),
+    DSMRSensorEntityDescription(
+        key="eon_hu_actual_treshold_electricity",
+        translation_key="actual_treshold_electricity",
+        obis_reference=obis_references.BELGIUM_MAX_POWER_PER_PHASE,
+        dsmr_versions={"5EONHU"},
+        device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
@@ -527,45 +537,45 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
     #     state_class=SensorStateClass.MEASUREMENT,
     #     entity_category=EntityCategory.DIAGNOSTIC,
     # ),
-    # DSMRSensorEntityDescription(
-    #     key="eon_hu_max_power_on_l1",
-    #     translation_key="eon_hu_max_power_on_l1",
-    #     obis_reference=obis_references.BELGIUM_MAX_CURRENT_PER_PHASE,
-    #     dsmr_versions={"5EONHU"},
-    #     device_class=SensorDeviceClass.CURRENT,
-    #     entity_registry_enabled_default=False,
-    #     state_class=SensorStateClass.MEASUREMENT,
-    #     entity_category=EntityCategory.DIAGNOSTIC,
-    # ),
-    # DSMRSensorEntityDescription(
-    #     key="eon_hu_max_power_on_l2",
-    #     translation_key="eon_hu_max_power_on_l2",
-    #     obis_reference=obis_references.EON_HU_MAX_POWER_ON_L2,
-    #     dsmr_versions={"5EONHU"},
-    #     device_class=SensorDeviceClass.CURRENT,
-    #     entity_registry_enabled_default=False,
-    #     state_class=SensorStateClass.MEASUREMENT,
-    #     entity_category=EntityCategory.DIAGNOSTIC,
-    # ),
-    # DSMRSensorEntityDescription(
-    #     key="eon_hu_max_power_on_l3",
-    #     translation_key="eon_hu_max_power_on_l3",
-    #     obis_reference=obis_references.EON_HU_MAX_POWER_ON_L3,
-    #     dsmr_versions={"5EONHU"},
-    #     device_class=SensorDeviceClass.CURRENT,
-    #     entity_registry_enabled_default=False,
-    #     state_class=SensorStateClass.MEASUREMENT,
-    #     entity_category=EntityCategory.DIAGNOSTIC,
-    # ),
-    # DSMRSensorEntityDescription(
-    #     key="text_message",
-    #     translation_key="text_message",
-    #     obis_reference=obis_references.TEXT_MESSAGE,
-    #     dsmr_versions={"5EONHU"},
-    #     entity_registry_enabled_default=False,
-    #     state_class=SensorStateClass.MEASUREMENT,
-    #     entity_category=EntityCategory.DIAGNOSTIC,
-    # ),
+    DSMRSensorEntityDescription(
+        key="eon_hu_max_power_on_l1",
+        translation_key="max_power_on_l1",
+        obis_reference=obis_references.BELGIUM_MAX_CURRENT_PER_PHASE,
+        dsmr_versions={"5EONHU"},
+        device_class=SensorDeviceClass.CURRENT,
+        entity_registry_enabled_default=False,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    DSMRSensorEntityDescription(
+        key="eon_hu_max_power_on_l2",
+        translation_key="max_power_on_l2",
+        obis_reference=obis_references.EON_HU_MAX_POWER_ON_L2,
+        dsmr_versions={"5EONHU"},
+        device_class=SensorDeviceClass.CURRENT,
+        entity_registry_enabled_default=False,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    DSMRSensorEntityDescription(
+        key="eon_hu_max_power_on_l3",
+        translation_key="max_power_on_l3",
+        obis_reference=obis_references.EON_HU_MAX_POWER_ON_L3,
+        dsmr_versions={"5EONHU"},
+        device_class=SensorDeviceClass.CURRENT,
+        entity_registry_enabled_default=False,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    DSMRSensorEntityDescription(
+        key="text_message",
+        translation_key="text_message",
+        obis_reference=obis_references.TEXT_MESSAGE,
+        dsmr_versions={"5EONHU"},
+        entity_registry_enabled_default=False,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+    ),
 )
 
 
@@ -944,7 +954,7 @@ class DSMREntity(SensorEntity):
         """Convert 2/1 to normal/low depending on DSMR version."""
         # DSMR V5B: Note: In Belgium values are swapped:
         # Rate code 2 is used for low rate and rate code 1 is used for normal rate.
-        if dsmr_version == "5B":
+        if dsmr_version == "5B" or dsmr_version == "5EONHU":
             if value == "0001":
                 value = "0002"
             elif value == "0002":
@@ -955,5 +965,9 @@ class DSMREntity(SensorEntity):
             return "normal"
         if value == "0001":
             return "low"
+        if value == "0003":
+            return "tariff3"
+        if value == "0004":
+            return "tariff4"
 
         return None

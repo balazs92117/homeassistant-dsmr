@@ -52,7 +52,9 @@
                 "name": "Active tariff",
                 "state": {
                     "low": "Low",
-                    "normal": "Normal"
+                    "normal": "Normal",
+                    "tariff3": "Tariff 3",
+                    "tariff4": "Tariff 4"
                 }
             },
             "electricity_delivered_tariff_1": {
@@ -60,6 +62,12 @@
             },
             "electricity_delivered_tariff_2": {
                 "name": "Energy production (tarif 2)"
+            },
+            "electricity_delivered_tariff_3": {
+                "name": "Energy production (tarif 3)"
+            },
+            "electricity_delivered_tariff_4": {
+                "name": "Energy production (tarif 4)"
             },
             "electricity_exported_total": {
                 "name": "Energy production (total)"
@@ -72,6 +80,12 @@
             },
             "electricity_used_tariff_2": {
                 "name": "Energy consumption (tarif 2)"
+            },
+            "electricity_used_tariff_3": {
+                "name": "Energy consumption (tarif 3)"
+            },
+            "electricity_used_tariff_4": {
+                "name": "Energy consumption (tarif 4)"
             },
             "gas_meter_reading": {
                 "name": "Gas consumption"
@@ -143,7 +157,11 @@
                 "name": "Voltage swells phase L3"
             },
             "actual_switch_position": {
-                "name": "Actual switch position"
+                "name": "Actual switch position",
+                "state": {
+                    "1": "On",
+                    "0": "Off"
+                }
             },
             "electricity_combined": {
                 "name": "Energy combined"
@@ -161,7 +179,7 @@
                 "name": "Instantaneous power factor L3"
             },
             "frequency": {
-                "name": "frequency"
+                "name": "Frequency"
             },
             "max_power_on_l1": {
                 "name": "Max Power on L1"

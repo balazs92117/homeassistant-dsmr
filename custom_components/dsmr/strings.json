@@ -52,7 +52,9 @@
         "name": "Active tariff",
         "state": {
           "low": "Low",
-          "normal": "Normal"
+          "normal": "Normal",
+          "tariff3": "Tariff 3",
+          "tariff4": "Tariff 4"
         }
       },
       "electricity_delivered_tariff_1": {
@@ -72,6 +74,12 @@
       },
       "electricity_used_tariff_2": {
         "name": "Energy consumption (tarif 2)"
+      },
+      "electricity_used_tariff_3": {
+        "name": "Energy consumption (tarif 3)"
+      },
+      "electricity_used_tariff_4": {
+        "name": "Energy consumption (tarif 4)"
       },
       "gas_meter_reading": {
         "name": "Gas consumption"
@@ -149,7 +157,14 @@
         "name": "Voltage swells phase L3"
       },
       "actual_switch_position": {
-        "name": "Actual switch position"
+        "name": "Actual switch position",
+        "state": {
+            "1": "On",
+            "0": "Off"
+        }
+      },
+      "actual_treshold_electricity": {
+        "name": "Actual treshold electricity"
       },
       "electricity_combined": {
         "name": "Energy combined"
@@ -177,6 +192,9 @@
       },
       "max_power_on_l3": {
         "name": "Max Power on L3"
+      },
+      "text_message": {
+        "name": "Text message"
       }
     }
   },
