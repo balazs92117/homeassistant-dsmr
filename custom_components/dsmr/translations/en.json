@@ -159,8 +159,8 @@
             "actual_switch_position": {
                 "name": "Actual switch position",
                 "state": {
-                    "1.0": "On",
-                    "0.0": "Off"
+                    "on": "On",
+                    "off": "Off"
                 }
             },
             "electricity_combined": {

@@ -938,6 +938,12 @@ class DSMREntity(SensorEntity):
         ):
             return self.translate_tariff(value, self._entry.data[CONF_DSMR_VERSION])
 
+        if (
+            self.entity_description.obis_reference
+            == obis_references.ACTUAL_SWITCH_POSITION
+        ):
+            return self.translate_switch_position(value, self._entry.data[CONF_DSMR_VERSION])
+
         with suppress(TypeError):
             value = round(
                 float(value), self._entry.data.get(CONF_PRECISION, DEFAULT_PRECISION)
@@ -957,6 +963,7 @@ class DSMREntity(SensorEntity):
     def translate_tariff(value: str, dsmr_version: str) -> str | None:
         """Convert 2/1 to normal/low depending on DSMR version."""
         # DSMR V5B: Note: In Belgium values are swapped:
+        # DSMR V5EONHU: Note: In EON HUngary values are swapped:
         # Rate code 2 is used for low rate and rate code 1 is used for normal rate.
         if dsmr_version == "5B" or dsmr_version == "5EONHU":
             if value == "0001":
@@ -973,5 +980,14 @@ class DSMREntity(SensorEntity):
             return "tariff3"
         if value == "0004":
             return "tariff4"
+
+        return None
+
+    @staticmethod
+    def translate_switch_position(value: str, dsmr_version: str) -> str | None:
+        if value == "1":
+            return "on"
+        if value == "0":
+            return "off"
 
         return None
