@@ -181,6 +181,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         key="instantaneous_active_power_l1_positive",
         translation_key="instantaneous_active_power_l1_positive",
         obis_reference=obis_references.INSTANTANEOUS_ACTIVE_POWER_L1_POSITIVE,
+        dsmr_versions={"2.2", "4", "5", "5B", "5L", "5S", "Q3D"},
         device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
@@ -189,6 +190,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         key="instantaneous_active_power_l2_positive",
         translation_key="instantaneous_active_power_l2_positive",
         obis_reference=obis_references.INSTANTANEOUS_ACTIVE_POWER_L2_POSITIVE,
+        dsmr_versions={"2.2", "4", "5", "5B", "5L", "5S", "Q3D"},
         device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
@@ -197,6 +199,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         key="instantaneous_active_power_l3_positive",
         translation_key="instantaneous_active_power_l3_positive",
         obis_reference=obis_references.INSTANTANEOUS_ACTIVE_POWER_L3_POSITIVE,
+        dsmr_versions={"2.2", "4", "5", "5B", "5L", "5S", "Q3D"},
         device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
@@ -205,6 +208,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         key="instantaneous_active_power_l1_negative",
         translation_key="instantaneous_active_power_l1_negative",
         obis_reference=obis_references.INSTANTANEOUS_ACTIVE_POWER_L1_NEGATIVE,
+        dsmr_versions={"2.2", "4", "5", "5B", "5L", "5S", "Q3D"},
         device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
@@ -213,6 +217,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         key="instantaneous_active_power_l2_negative",
         translation_key="instantaneous_active_power_l2_negative",
         obis_reference=obis_references.INSTANTANEOUS_ACTIVE_POWER_L2_NEGATIVE,
+        dsmr_versions={"2.2", "4", "5", "5B", "5L", "5S", "Q3D"},
         device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
@@ -221,6 +226,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         key="instantaneous_active_power_l3_negative",
         translation_key="instantaneous_active_power_l3_negative",
         obis_reference=obis_references.INSTANTANEOUS_ACTIVE_POWER_L3_NEGATIVE,
+        dsmr_versions={"2.2", "4", "5", "5B", "5L", "5S", "Q3D"},
         device_class=SensorDeviceClass.POWER,
         entity_registry_enabled_default=False,
         state_class=SensorStateClass.MEASUREMENT,
@@ -443,6 +449,54 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
+    # DSMRSensorEntityDescription(
+    #     key="electricity_reactive_imported_total",
+    #     translation_key="electricity_reactive_imported_total",
+    #     obis_reference=obis_references.ELECTRICITY_REACTIVE_IMPORTED_TOTAL,
+    #     dsmr_versions={"5EONHU"},
+    #     device_class=SensorDeviceClass.REACTIVE_ENERGY,
+    #     state_class=SensorStateClass.TOTAL,
+    # ),
+    # DSMRSensorEntityDescription(
+    #     key="electricity_reactive_exported_total",
+    #     translation_key="electricity_reactive_exported_total",
+    #     obis_reference=obis_references.ELECTRICITY_REACTIVE_EXPORTED_TOTAL,
+    #     dsmr_versions={"5EONHU"},
+    #     device_class=SensorDeviceClass.REACTIVE_ENERGY,
+    #     state_class=SensorStateClass.TOTAL,
+    # ),
+    # DSMRSensorEntityDescription(
+    #     key="eon_hu_electricity_reactive_total_q1",
+    #     translation_key="electricity_reactive_total_q1",
+    #     obis_reference=obis_references.EON_HU_ELECTRICITY_REACTIVE_TOTAL_Q1,
+    #     dsmr_versions={"5EONHU"},
+    #     device_class=SensorDeviceClass.REACTIVE_ENERGY,
+    #     state_class=SensorStateClass.TOTAL,
+    # ),
+    # DSMRSensorEntityDescription(
+    #     key="eon_hu_electricity_reactive_total_q2",
+    #     translation_key="eon_hu_electricity_reactive_total_q2",
+    #     obis_reference=obis_references.EON_HU_ELECTRICITY_REACTIVE_TOTAL_Q2,
+    #     dsmr_versions={"5EONHU"},
+    #     device_class=SensorDeviceClass.REACTIVE_ENERGY,
+    #     state_class=SensorStateClass.TOTAL,
+    # ),
+    # DSMRSensorEntityDescription(
+    #     key="eon_hu_electricity_reactive_total_q3",
+    #     translation_key="electricity_reactive_total_q3",
+    #     obis_reference=obis_references.EON_HU_ELECTRICITY_REACTIVE_TOTAL_Q3,
+    #     dsmr_versions={"5EONHU"},
+    #     device_class=SensorDeviceClass.REACTIVE_ENERGY,
+    #     state_class=SensorStateClass.TOTAL,
+    # ),
+    # DSMRSensorEntityDescription(
+    #     key="eon_hu_electricity_reactive_q4",
+    #     translation_key="electricity_reactive_q4",
+    #     obis_reference=obis_references.EON_HU_ELECTRICITY_REACTIVE_TOTAL_Q4,
+    #     dsmr_versions={"5EONHU"},
+    #     device_class=SensorDeviceClass.REACTIVE_ENERGY,
+    #     state_class=SensorStateClass.TOTAL,
+    # ),
     DSMRSensorEntityDescription(
         key="eon_hu_electricity_combined",
         translation_key="electricity_combined",
@@ -985,6 +1039,7 @@ class DSMREntity(SensorEntity):
 
     @staticmethod
     def translate_switch_position(value: str, dsmr_version: str) -> str | None:
+        # In the future the dsmr_version might be required for the if.
         if value == "1":
             return "on"
         if value == "0":

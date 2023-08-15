@@ -172,6 +172,24 @@
       "actual_treshold_electricity": {
         "name": "Actual treshold electricity"
       },
+      "electricity_reactive_imported_total": {
+        "name": "Imported reactive electricity (total)"
+      },
+      "electricity_reactive_exported_total": {
+        "name": "Exported reactive electricity (total)"
+      },
+      "electricity_reactive_total_q1": {
+        "name": "Reactive electricity (Q1)"
+      },
+      "electricity_reactive_total_q2": {
+        "name": "Reactive electricity (Q2)"
+      },
+      "electricity_reactive_total_q3": {
+        "name": "Reactive electricity (Q3)"
+      },
+      "electricity_reactive_total_q4": {
+        "name": "Reactive electricity (Q4)"
+      },
       "electricity_combined": {
         "name": "Energy combined"
       },
