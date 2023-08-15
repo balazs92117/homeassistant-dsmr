@@ -141,6 +141,39 @@
             },
             "voltage_swell_l3_count": {
                 "name": "Voltage swells phase L3"
+            },
+            "actual_switch_position": {
+                "name": "Actual switch position"
+            },
+            "electricity_combined": {
+                "name": "Energy combined"
+            },
+            "instantaneous_power_factor_total": {
+                "name": "Instantaneous power factor (total)"
+            },
+            "instantaneous_power_factor_l1": {
+                "name": "Instantaneous power factor L1"
+            },
+            "instantaneous_power_factor_l2": {
+                "name": "Instantaneous power factor L2"
+            },
+            "instantaneous_power_factor_l3": {
+                "name": "Instantaneous power factor L3"
+            },
+            "frequency": {
+                "name": "frequency"
+            },
+            "max_power_on_l1": {
+                "name": "Max Power on L1"
+            },
+            "max_power_on_l2": {
+                "name": "Max Power on L2"
+            },
+            "max_power_on_l3": {
+                "name": "Max Power on L3"
+            },
+            "text_message": {
+                "name": "Text message"
             }
         }
     },
