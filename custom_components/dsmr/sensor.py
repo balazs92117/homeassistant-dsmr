@@ -430,7 +430,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         obis_reference=obis_references.ACTUAL_SWITCH_POSITION,
         dsmr_versions={"5EONHU"},
         device_class=SensorDeviceClass.ENUM,
-        options=[1.0, 0.0],
+        options=["on", "off"],
         icon="mdi:electric-switch",
     ),
     DSMRSensorEntityDescription(
