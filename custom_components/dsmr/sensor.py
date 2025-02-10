@@ -582,7 +582,7 @@ SENSORS_MBUS_DEVICE_TYPE: dict[int, tuple[DSMRSensorEntityDescription, ...]] = {
 def device_class_and_uom(
     data: Telegram | MbusDevice,
     entity_description: DSMRSensorEntityDescription,
-) -> tuple[SensorDeviceClass | None, str | None]:
+) -> tuple[SensorDeviceClass | BinarySensorDeviceClass | None, str | None]:
     """Get native unit of measurement from telegram,."""
     dsmr_object = getattr(data, entity_description.obis_reference)
     uom: str | None = getattr(dsmr_object, "unit") or None
@@ -984,9 +984,6 @@ class DSMREntity(SensorEntity):
 
         if self.entity_description.obis_reference == "ELECTRICITY_ACTIVE_TARIFF":
             return self.translate_tariff(value, self._entry.data[CONF_DSMR_VERSION])
-
-        if self.entity_description.obis_reference == "ACTUAL_SWITCH_POSITION":
-            return bool(float(value))
 
         with suppress(TypeError):
             value = round(float(value), DEFAULT_PRECISION)
