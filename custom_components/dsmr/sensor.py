@@ -985,6 +985,9 @@ class DSMREntity(SensorEntity):
         if self.entity_description.obis_reference == "ELECTRICITY_ACTIVE_TARIFF":
             return self.translate_tariff(value, self._entry.data[CONF_DSMR_VERSION])
 
+        if self.entity_description.obis_reference == "ACTUAL_SWITCH_POSITION":
+            return bool(float(value))
+
         with suppress(TypeError):
             value = round(float(value), DEFAULT_PRECISION)
 
