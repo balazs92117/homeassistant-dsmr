@@ -26,11 +26,6 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorStateClass,
 )
-
-from homeassistant.components.binary_sensor import (
-    BinarySensorDeviceClass,
-    BinarySensorEntity,
-)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     CONF_HOST,
@@ -429,14 +424,6 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
     DSMRSensorEntityDescription(
-        key="actual_switch_position",
-        translation_key="actual_switch_position",
-        obis_reference="ACTUAL_SWITCH_POSITION",
-        dsmr_versions={"5EONHU"},
-        device_class=BinarySensorDeviceClass.CONNECTIVITY,
-        icon="mdi:electric-switch",
-    ),
-    DSMRSensorEntityDescription(
         key="actual_treshold_electricity",
         translation_key="actual_treshold_electricity",
         obis_reference="ACTUAL_TRESHOLD_ELECTRICITY",
@@ -582,7 +569,7 @@ SENSORS_MBUS_DEVICE_TYPE: dict[int, tuple[DSMRSensorEntityDescription, ...]] = {
 def device_class_and_uom(
     data: Telegram | MbusDevice,
     entity_description: DSMRSensorEntityDescription,
-) -> tuple[SensorDeviceClass | BinarySensorDeviceClass | None, str | None]:
+) -> tuple[SensorDeviceClass | None, str | None]:
     """Get native unit of measurement from telegram,."""
     dsmr_object = getattr(data, entity_description.obis_reference)
     uom: str | None = getattr(dsmr_object, "unit") or None
@@ -889,7 +876,7 @@ async def async_setup_entry(
     entry.runtime_data.task = task
 
 
-class DSMREntity(SensorEntity, BinarySensorEntity):
+class DSMREntity(SensorEntity):
     """Entity reading values from DSMR telegram."""
 
     entity_description: DSMRSensorEntityDescription
@@ -901,7 +888,7 @@ class DSMREntity(SensorEntity, BinarySensorEntity):
         entity_description: DSMRSensorEntityDescription,
         entry: ConfigEntry,
         telegram: Telegram,
-        device_class: SensorDeviceClass | BinarySensorDeviceClass,
+        device_class: SensorDeviceClass,
         native_unit_of_measurement: str | None,
         serial_id: str = "",
         mbus_id: int = 0,
@@ -993,15 +980,6 @@ class DSMREntity(SensorEntity, BinarySensorEntity):
             return None
 
         return value
-
-    @property
-    def is_on(self) -> bool:
-        """Return if the binary sensor is currently on or off."""
-        value: bool
-        if self.entity_description.obis_reference == "ACTUAL_SWITCH_POSITION":
-            return bool(float(value))
-
-        return None
 
     @staticmethod
     def translate_tariff(value: str, dsmr_version: str) -> str | None:
