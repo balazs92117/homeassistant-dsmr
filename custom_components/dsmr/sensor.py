@@ -901,7 +901,7 @@ class DSMREntity(SensorEntity):
         entity_description: DSMRSensorEntityDescription,
         entry: ConfigEntry,
         telegram: Telegram,
-        device_class: SensorDeviceClass,
+        device_class: SensorDeviceClass | BinarySensorDeviceClass,
         native_unit_of_measurement: str | None,
         serial_id: str = "",
         mbus_id: int = 0,
@@ -996,6 +996,15 @@ class DSMREntity(SensorEntity):
             return None
 
         return value
+
+    @property
+    def is_on(self) -> bool:
+        """Return if the binary sensor is currently on or off."""
+        value: bool
+        if self.entity_description.obis_reference == "ACTUAL_SWITCH_POSITION":
+            return bool(float(value))
+
+        return None
 
     @staticmethod
     def translate_tariff(value: str, dsmr_version: str) -> str | None:
