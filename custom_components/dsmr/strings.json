@@ -18,15 +18,15 @@
       "setup_serial": {
         "data": {
           "port": "Select device",
-          "dsmr_version": "Select DSMR version"
+          "dsmr_version": "[%key:component::dsmr::config::step::setup_network::data::dsmr_version%]"
         },
-        "title": "Device"
+        "title": "[%key:common::config_flow::data::device%]"
       },
       "setup_serial_manual_path": {
         "data": {
           "port": "[%key:common::config_flow::data::usb_path%]"
         },
-        "title": "Path"
+        "title": "[%key:common::config_flow::data::path%]"
       }
     },
     "error": {
@@ -37,7 +37,7 @@
     "abort": {
       "already_configured": "[%key:common::config_flow::abort::already_configured_device%]",
       "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
-      "cannot_communicate": "Failed to communicate"
+      "cannot_communicate": "[%key:component::dsmr::config::error::cannot_communicate%]"
     }
   },
   "entity": {
@@ -52,9 +52,7 @@
         "name": "Active tariff",
         "state": {
           "low": "Low",
-          "normal": "Normal",
-          "tariff3": "Tariff 3",
-          "tariff4": "Tariff 4"
+          "normal": "Normal"
         }
       },
       "electricity_delivered_tariff_1": {
@@ -93,7 +91,7 @@
       "current_average_demand": {
         "name": "Current average demand"
       },
-      "maximum_demand_month": {
+      "maximum_demand_current_month": {
         "name": "Maximum demand current month"
       },
       "instantaneous_active_power_l1_negative": {
@@ -162,11 +160,14 @@
       "voltage_swell_l3_count": {
         "name": "Voltage swells phase L3"
       },
+      "water_meter_reading": {
+        "name": "Water consumption"
+      },
       "actual_switch_position": {
         "name": "Actual switch position",
         "state": {
-            "on": "On",
-            "off": "Off"
+          "on": "On",
+          "off": "Off"
         }
       },
       "actual_treshold_electricity": {
@@ -208,14 +209,14 @@
       "frequency": {
         "name": "Frequency"
       },
-      "max_power_on_l1": {
-        "name": "Max Power on L1"
+      "fuse_threshold_l1": {
+        "name": "Fuse threshold on L1"
       },
-      "max_power_on_l2": {
-        "name": "Max Power on L2"
+      "fuse_threshold_l2": {
+        "name": "Fuse threshold on L2"
       },
-      "max_power_on_l3": {
-        "name": "Max Power on L3"
+      "fuse_threshold_l3": {
+        "name": "Fuse threshold on L3"
       },
       "text_message": {
         "name": "Text message"
