@@ -889,7 +889,7 @@ async def async_setup_entry(
     entry.runtime_data.task = task
 
 
-class DSMREntity(SensorEntity):
+class DSMREntity(SensorEntity, BinarySensorEntity):
     """Entity reading values from DSMR telegram."""
 
     entity_description: DSMRSensorEntityDescription
