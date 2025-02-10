@@ -423,15 +423,14 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.GAS,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
-    # DSMRSensorEntityDescription(
-    #     key="actual_switch_position",
-    #     translation_key="actual_switch_position",
-    #     obis_reference="ACTUAL_SWITCH_POSITION",
-    #     dsmr_versions={"5EONHU"},
-    #     device_class=SensorDeviceClass.ENUM,
-    #     options=["on", "off"],
-    #     icon="mdi:electric-switch",
-    # ),
+    DSMRSensorEntityDescription(
+        key="actual_switch_position",
+        translation_key="actual_switch_position",
+        obis_reference="ACTUAL_SWITCH_POSITION",
+        dsmr_versions={"5EONHU"},
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:electric-switch",
+    ),
     DSMRSensorEntityDescription(
         key="actual_treshold_electricity",
         translation_key="actual_treshold_electricity",
