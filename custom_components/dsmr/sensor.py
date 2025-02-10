@@ -433,7 +433,7 @@ SENSORS: tuple[DSMRSensorEntityDescription, ...] = (
         translation_key="actual_switch_position",
         obis_reference="ACTUAL_SWITCH_POSITION",
         dsmr_versions={"5EONHU"},
-        device_class=BinarySensorDeviceClass.POWER,
+        device_class=BinarySensorDeviceClass.CONNECTIVITY,
         icon="mdi:electric-switch",
     ),
     DSMRSensorEntityDescription(
